@@ -1,0 +1,16 @@
+master:
+  persistence:
+    enabled: true
+    size: "30Gi"
+replica:
+  persistence:
+    enabled: true
+    size: "30Gi"
+usePassword: false
+auth:
+  enabled: false
+  sentinel: false
+tls:
+  enabled: false
+  authClients: false
+

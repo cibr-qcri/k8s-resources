@@ -1,0 +1,35 @@
+clusterName: "elasticsearch"
+imageTag: "7.16.3"
+antiAffinity: "soft"
+extraVolumes:
+  - name: snapshot-repository
+    nfs:
+      server: 10.4.8.255
+      path: /toshi-backup
+extraVolumeMounts:
+  - name: snapshot-repository
+    mountPath: /snapshots
+replicas: 20
+minimumMasterNodes: 1
+# clusterHealthCheckParams: 'wait_for_status=red&timeout=1s'
+esConfig:
+  elasticsearch.yml: |
+    path.repo: ["/snapshots"]
+    reindex.remote.whitelist: 10.4.8.146:*
+volumeClaimTemplate:
+  resources:
+    requests:
+      storage: 200Gi
+resources:
+  requests:
+    cpu: "6000m"
+    memory: "20Gi"
+  limits:
+    memory: "30Gi"
+    cpu: "6000m"
+extraEnvs:
+  - name: "ES_HEAP_SIZE"
+    value: "15g"
+  - name: "ES_JAVA_OPTS"
+    value: "-Xms15g -Xmx15g"
+
