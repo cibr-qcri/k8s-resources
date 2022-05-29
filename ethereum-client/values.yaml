@@ -1,10 +1,8 @@
 ethereum:
   image:
     name: 'ethereum/client-go'
-    tag: 'v1.8.10'
+    tag: 'latest'
     pullPolicy: Always
-    volume:
-      mountPath: '/opt/geth/geth'
   storage:
     className: 'managed-nfs-storage'
     size: '800Gi'

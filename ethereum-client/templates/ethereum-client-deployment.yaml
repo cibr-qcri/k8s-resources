@@ -30,13 +30,12 @@ spec:
                       - {{ .Values.ethereum.nodeSelector.value }}
       {{- end }}
       volumes:
-        - name: geth-datadir
+        - name: geth-ipc
           persistentVolumeClaim:
             claimName: ethereum-client-pv-claim
       containers:
         - name: ethereum-core
           image: "{{ .Values.ethereum.image.name }}:{{ .Values.ethereum.image.tag }}"
-          command: ['/bin/sh', '-c', 'geth --cache 256 --maxpeers 50 --syncmode light --rpc --rpcaddr "0.0.0.0" --rpcapi=db,eth,net,web3 --rpccorsdomain "*" --rpcvhosts="*" --ws --wsaddr "0.0.0.0" --wsorigins "*"']
           ports:
           - name: rpc
             containerPort: 8545
@@ -53,11 +52,8 @@ spec:
               cpu: 8  
           imagePullPolicy: {{ .Values.ethereum.image.pullPolicy }}
           volumeMounts:
-            - name: geth-datadir
-              mountPath: /opt/geth/geth
-          env:
-            - name: MOUNT_PATH
-              value: {{ .Values.ethereum.image.volume.mountPath }}
+            - name: geth-ipc
+              mountPath: /root/
 
 ---
 apiVersion: v1
