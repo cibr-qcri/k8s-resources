@@ -1,0 +1,11 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: ethereum-client-pv-claim
+spec:
+  storageClassName: { { .Values.ethereum.storage.className } }
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: { { .Values.ethereum.storage.size } }

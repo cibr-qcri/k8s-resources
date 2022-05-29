@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ethereum-client-deployment
+  labels:
+    app: ethereum-client
+    tier: ethereum
+spec:
+  replicas:
+  selector:
+    matchLabels:
+      app: ethereum-client
+      tier: ethereum
+  template:
+    metadata:
+      labels:
+        app: ethereum-client
+        tier: ethereum
+    spec:
+      {{- if and .Values.ethereum.nodeSelector.key .Values.ethereum.nodeSelector.value }}
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                  - key: {{ .Values.ethereum.nodeSelector.key }}
+                    operator: In
+                    values:
+                      - {{ .Values.ethereum.nodeSelector.value }}
+      {{- end }}
+      volumes:
+        - name: ethereum-client-pv-storage
+          persistentVolumeClaim:
+            claimName: ethereum-client-pv-claim
+      containers:
+        - name: ethereum-core
+          image: "{{ .Values.ethereum.image.name }}:{{ .Values.ethereum.image.tag }}"
+          command: ['/bin/sh', '-c', 'geth --cache 256 --maxpeers 50 --syncmode light --rpc --rpcaddr "0.0.0.0" --rpcapi=db,eth,net,web3 --rpccorsdomain "*" --rpcvhosts="*" --ws --wsaddr "0.0.0.0" --wsorigins "*"']
+          ports:
+          - name: rpc
+            containerPort: 8545
+          - name: ws
+            containerPort: 8546
+          - name: p2p
+            containerPort: 30303
+          resources:
+            requests:
+              memory: "10Gi"
+              cpu: 2
+            limits:
+              memory: "25Gi"
+              cpu: 8  
+          imagePullPolicy: {{ .Values.ethereum.image.pullPolicy }}
+          volumeMounts:
+            - name: ethereum-client-pv-storage
+              mountPath: {{ .Values.ethereum.image.volume.mountPath }}
+          env:
+            - name: MOUNT_PATH
+              value: {{ .Values.ethereum.image.volume.mountPath }}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ethereum-client-service
+  labels:
+    tier: ethereum
+spec:
+  selector:
+    app: ethereum-client
+    tier: ethereum
+  ports:
+  - name: rpc
+    port: 8545
+  - name: ws
+    port: 8546
+  - name: p2p
+    port: 30303

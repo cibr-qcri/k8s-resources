@@ -36,6 +36,8 @@ spec:
       containers:
         - name: bitcoin-core
           image: "{{ .Values.bitcoin.image.name }}:{{ .Values.bitcoin.image.tag }}"
+          ports:
+          - containerPort: {{ .Values.bitcoin.service.targetPort }}
           resources:
             requests:
               memory: "10Gi"

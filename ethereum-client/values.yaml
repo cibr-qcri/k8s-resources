@@ -1,0 +1,13 @@
+ethereum:
+  image:
+    name: 'ethereum/client-go'
+    tag: 'v1.8.10'
+    pullPolicy: Always
+    volume:
+      mountPath: '/mnt/data/ethereum'
+  storage:
+    className: 'managed-nfs-storage'
+    size: '800Gi'
+  nodeSelector:
+    key: 'kubernetes.io/hostname'
+    value: 'cybubcibrdev001'
