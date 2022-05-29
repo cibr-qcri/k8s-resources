@@ -70,6 +70,7 @@ spec:
   selector:
     app: ethereum-client
     tier: ethereum
+  type: NodePort
   ports:
   - name: rpc
     port: 8545
