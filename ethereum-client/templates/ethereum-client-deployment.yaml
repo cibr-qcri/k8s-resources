@@ -30,7 +30,7 @@ spec:
                       - {{ .Values.ethereum.nodeSelector.value }}
       {{- end }}
       volumes:
-        - name: ethereum-client-pv-storage
+        - name: geth-datadir
           persistentVolumeClaim:
             claimName: ethereum-client-pv-claim
       containers:
@@ -53,8 +53,8 @@ spec:
               cpu: 8  
           imagePullPolicy: {{ .Values.ethereum.image.pullPolicy }}
           volumeMounts:
-            - name: ethereum-client-pv-storage
-              mountPath: {{ .Values.ethereum.image.volume.mountPath }}
+            - name: geth-datadir
+              mountPath: /opt/geth/geth
           env:
             - name: MOUNT_PATH
               value: {{ .Values.ethereum.image.volume.mountPath }}

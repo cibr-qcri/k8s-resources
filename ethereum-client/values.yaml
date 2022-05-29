@@ -4,7 +4,7 @@ ethereum:
     tag: 'v1.8.10'
     pullPolicy: Always
     volume:
-      mountPath: '/mnt/data/ethereum'
+      mountPath: '/opt/geth/geth'
   storage:
     className: 'managed-nfs-storage'
     size: '800Gi'
