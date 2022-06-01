@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ethereum-parser-deployment
+  labels:
+    app: ethereum-parser
+    tier: ethereum
+spec:
+  replicas:
+  selector:
+    matchLabels:
+      app: ethereum-parser
+      tier: ethereum
+  template:
+    metadata:
+      labels:
+        app: ethereum-parser
+        tier: ethereum
+    spec:
+      containers:
+        - name: ethereum-core
+          image: "{{ .Values.ethereum.image.name }}:{{ .Values.ethereum.image.tag }}"
+          imagePullPolicy: {{ .Values.ethereum.image.pullPolicy }}
+

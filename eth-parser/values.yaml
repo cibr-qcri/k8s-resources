@@ -1,0 +1,5 @@
+ethereum:
+  image:
+    name: 'sajithagimash/eth-parser'
+    tag: '1.0.0'
+    pullPolicy: Always
