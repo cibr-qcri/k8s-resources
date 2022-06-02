@@ -3,7 +3,7 @@ CREATE DATABASE eth_blockchain;
 
 CREATE TABLE eth_block (
 	id SERIAL primary key NOT NULL,
-    number bigint,
+    height bigint,
     hash varchar(256),
     parent_hash	varchar(256),
     nonce varchar(256),

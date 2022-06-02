@@ -21,4 +21,14 @@ spec:
         - name: ethereum-core
           image: "{{ .Values.ethereum.image.name }}:{{ .Values.ethereum.image.tag }}"
           imagePullPolicy: {{ .Values.ethereum.image.pullPolicy }}
-
+          env:
+            - name: START_BLOCK_HEIGHT
+              value: {{ .Values.ethereum.parser.startBlockHeight | quote }}
+            - name: END_BLOCK_HEIGHT
+              value: {{ .Values.ethereum.parser.endBlockHeight | quote }}
+            - name: BATCH_SIZE
+              value: {{ .Values.ethereum.parser.batchSize | quote }}
+            - name: ETHEREUM_CLIENT_HOST
+              value: {{ .Values.ethereum.parser.ethereumClientHost | quote }}
+            - name: ETHEREUM_CLIENT_PORT
+              value: {{ .Values.ethereum.parser.ethereumClientPort | quote }}

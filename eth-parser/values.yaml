@@ -3,3 +3,9 @@ ethereum:
     name: 'sajithagimash/eth-parser'
     tag: '1.0.0'
     pullPolicy: Always
+  parser:
+    startBlockHeight: '1000000'
+    endBlockHeight: '1010000'
+    batchSize: '1000'
+    ethereumClientHost: '10.4.8.131'
+    ethereumClientPort: '30872'
