@@ -14,7 +14,7 @@ ARG GREENPLUM_DB=eth_blockchain
 
 RUN useradd -r bitcoin \
   && apt-get update -y \
-  && apt-get install -y curl gnupg gosu python3-pip postgresql-client\
+  && apt-get install -y curl gnupg gosu python3-pip jq postgresql-client\
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* 
 
