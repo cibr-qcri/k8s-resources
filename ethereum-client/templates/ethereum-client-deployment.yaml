@@ -71,7 +71,11 @@ spec:
   ports:
   - name: rpc
     port: 8545
+    targetPort: 8545
+    nodePort: 31389
   - name: ws
     port: 8546
   - name: p2p
     port: 30303
+  externalIPs: 
+    - 10.4.8.131
