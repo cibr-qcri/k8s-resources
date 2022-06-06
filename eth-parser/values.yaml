@@ -4,8 +4,11 @@ ethereum:
     tag: '1.0.0'
     pullPolicy: Always
   parser:
-    startBlockHeight: '14000000'
-    endBlockHeight: '14010000'
+    startBlockHeight: '0'
+    endBlockHeight: '6000000'
     batchSize: '1000'
     ethereumClientHost: '10.4.8.131'
     ethereumClientPort: '31389'
+    greenplumHost: '10.4.8.131'
+    greenplumPort: '5432'
+    greenplumUsername: 'gpadmin'

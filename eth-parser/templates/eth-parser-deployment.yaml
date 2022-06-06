@@ -32,3 +32,9 @@ spec:
               value: {{ .Values.ethereum.parser.ethereumClientHost | quote }}
             - name: ETHEREUM_CLIENT_PORT
               value: {{ .Values.ethereum.parser.ethereumClientPort | quote }}
+            - name: GREENPLUM_HOST
+              value: {{ .Values.ethereum.parser.greenplumHost | quote }}
+            - name: GREENPLUM_SERVICE_PORT
+              value: {{ .Values.ethereum.parser.greenplumPort | quote }}
+            - name: GREENPLUM_USERNAME
+              value: {{ .Values.ethereum.parser.greenplumUsername | quote }}
