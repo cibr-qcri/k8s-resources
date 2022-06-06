@@ -36,7 +36,7 @@ spec:
       containers:
         - name: ethereum-core
           image: "{{ .Values.ethereum.image.name }}:{{ .Values.ethereum.image.tag }}"
-          command: ['/bin/sh', '-c', 'geth --gcmode archive --syncmode full --http --http.port=8545 --http.addr=0.0.0.0 --http.api="admin,debug,web3,eth,personal" --http.vhosts="*" --txlookuplimit=0 --vmdebug --log.debug --allow-insecure-unlock']
+          command: ['/bin/sh', '-c', 'geth --http --http.port=8545 --http.addr=0.0.0.0 --http.api="admin,debug,web3,eth,personal" --http.vhosts="*" --txlookuplimit=0 --vmdebug --log.debug --allow-insecure-unlock']
           ports:
           - name: rpc
             containerPort: 8545
