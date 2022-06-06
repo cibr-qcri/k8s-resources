@@ -21,7 +21,7 @@ kubectl apply -f pvc.yaml
 ## Install Airflow:
 
 ```
-helm install airflow-cluster   airflow-stable/airflow  --namespace airflow-cluster -f values.yaml --version "8.X.X" --create-namespace
+helm install airflow-cluster  airflow-stable/airflow -f values.yaml --version "8.X.X"
 ```
 
 ## Install Airflow Ingress:

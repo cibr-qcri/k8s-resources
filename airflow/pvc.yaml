@@ -1,8 +1,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: toshi-airflow-pvc
-  namespace: airflow-cluster
+  name: cibr-airflow-pvc
 spec:
   storageClassName: managed-nfs-storage
   accessModes:
