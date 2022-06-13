@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "bitcoin-daemon-deployment-readonly-{{ .Values.bitcoin.client }}"
+  labels:
+    app: "bitcoin-daemon-{{ .Values.bitcoin.client }}"
+    tier: "bitcoin-{{ .Values.bitcoin.client }}"
+spec:
+  replicas:
+  selector:
+    matchLabels:
+      app: "bitcoin-daemon-{{ .Values.bitcoin.client }}"
+      tier: "bitcoin-{{ .Values.bitcoin.client }}"
+  template:
+    metadata:
+      labels:
+        app: "bitcoin-daemon-{{ .Values.bitcoin.client }}"
+        tier: "bitcoin-{{ .Values.bitcoin.client }}"
+    spec:
+      volumes:
+        - name: bitcoin-daemon-pv-storage
+          persistentVolumeClaim:
+            claimName: bitcoin-daemon-pv-claim
+      containers:
+        - name: bitcoin-core
+          image: "{{ .Values.bitcoin.image.name }}:{{ .Values.bitcoin.image.tag }}"
+          ports:
+          - containerPort: {{ .Values.bitcoin.service.targetPort }}
+          imagePullPolicy: {{ .Values.bitcoin.image.pullPolicy }}
+          volumeMounts:
+            - name: bitcoin-daemon-pv-storage
+              mountPath: {{ .Values.bitcoin.image.volume.mountPath }}
+          env:
+            - name: MOUNT_PATH
+              value: {{ .Values.bitcoin.image.volume.mountPath }}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: "bitcoin-daemon-service-readonly-{{ .Values.bitcoin.client }}"
+  labels:
+    tier: "bitcoin-{{ .Values.bitcoin.client }}"
+spec:
+  selector:
+    app: "bitcoin-daemon-{{ .Values.bitcoin.client }}"
+    tier: "bitcoin-{{ .Values.bitcoin.client }}"
+  ports:
+    - targetPort: {{ .Values.bitcoin.service.targetPort }}
+      port: {{ .Values.bitcoin.service.port }}
+      protocol: TCP
