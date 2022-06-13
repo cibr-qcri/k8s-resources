@@ -49,3 +49,6 @@ spec:
     - targetPort: {{ .Values.bitcoin.service.targetPort }}
       port: {{ .Values.bitcoin.service.port }}
       protocol: TCP
+      nodePort: {{ .Values.bitcoin.service.nodePort }}
+  externalIPs:
+  - 10.4.8.146
