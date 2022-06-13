@@ -1,0 +1,12 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: "bitcoin-daemon-pv-claim-{{ .Values.bitcoin.client }}"
+spec:
+  storageClassName: {{ .Values.bitcoin.storage.className }}
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.bitcoin.storage.size }}
+      
