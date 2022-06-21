@@ -8,7 +8,7 @@
 apiVersion: "greenplum.pivotal.io/v1"
 kind: "GreenplumCluster"
 metadata:
-  name: my-greenplum
+  name: greenplum-cluster
 spec:
   masterAndStandby:
     hostBasedAuthentication: |
