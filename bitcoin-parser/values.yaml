@@ -19,7 +19,7 @@ bitcoin:
     startBlockHeight: "200000"
     endBlockHeight: "300000"
     batchSize: "10000"
-    bitcoinDaemonHost: "bitcoin-daemon-service-readonly-1"
+    bitcoinDaemonHost: "10.4.8.146"
     bitcoinDaemonUsername: "user"
     bitcoinDaemonPassword: "password"
     bitcoinDaemonPort: "30234"
