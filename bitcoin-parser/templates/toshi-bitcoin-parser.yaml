@@ -18,16 +18,16 @@ spec:
         tier: bitcoin-{{ .Values.bitcoin.client }}
     spec:
       {{- if and .Values.bitcoin.nodeSelector.key .Values.bitcoin.nodeSelector.value }}
-       affinity:
+      affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-           - weight: 1
-             preference:
-               matchExpressions:
-                 - key: {{ .Values.bitcoin.nodeSelector.key }}
-                   operator: In
-                   values:
-                     - {{ .Values.bitcoin.nodeSelector.value }}
+            - weight: 1
+              preference:
+                matchExpressions:
+                  - key: {{ .Values.bitcoin.nodeSelector.key }}
+                    operator: In
+                    values:
+                      - {{ .Values.bitcoin.nodeSelector.value }}
       {{- end }}
       volumes:
         - name: toshi-bitcoin-parser-pv-storage
