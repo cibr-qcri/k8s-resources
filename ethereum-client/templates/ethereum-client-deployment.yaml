@@ -60,7 +60,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: ethereum-client-service-{{ .Values.ethereum.client }}
+  name: ethereum-client-rpc-service-{{ .Values.ethereum.client }}
   labels:
     tier: ethereum-{{ .Values.ethereum.client }}
 spec:
