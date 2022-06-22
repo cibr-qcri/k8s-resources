@@ -36,7 +36,7 @@ spec:
       containers:
         - name: ethereum-core
           image: "{{ .Values.ethereum.image.name }}:{{ .Values.ethereum.image.tag }}"
-          command: ['/bin/sh', '-c', 'geth --cache=2048 --http --http.port=8545 --http.addr=0.0.0.0 --http.api="admin,debug,web3,eth,personal" --http.vhosts="*" --txlookuplimit=0 --vmdebug --log.debug --allow-insecure-unlock']
+          command: ['/bin/sh', '-c', 'geth --syncmode full  --cache=2048 --http --http.port=8545 --http.addr=0.0.0.0 --http.api="admin,debug,web3,eth,personal" --http.vhosts="*" --txlookuplimit=0 --vmdebug --log.debug --allow-insecure-unlock']
           ports:
           - name: rpc
             containerPort: 8545
@@ -72,7 +72,7 @@ spec:
   - name: rpc
     port: 8545
     targetPort: 8545
-    nodePort: 31350
+    nodePort: 31352
   - name: ws
     port: 8546
   - name: p2p
