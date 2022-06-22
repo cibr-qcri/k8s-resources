@@ -1,18 +1,12 @@
 bitcoin:
   image:
-    name: "sajithagimash/bitcoin-daemon"
+    name: "sajithagimash/bitcoin-daemon-read-only"
     tag: "1.0.0"
     pullPolicy: Always
     volume:
       mountPath: "/mnt/data/bitcoin"
-  storage:
-    className: "managed-nfs-storage"
-    size: "800Gi"
-  nodeSelector:
-    key: "kubernetes.io/hostname"
-    value: "cybubtoshicl003"
   service:
     port: 8332
     targetPort: 8332
     nodePort: 30234
-  client: "1"
+  client: "test"

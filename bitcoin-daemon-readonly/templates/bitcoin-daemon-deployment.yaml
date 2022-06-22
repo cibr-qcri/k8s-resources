@@ -17,22 +17,10 @@ spec:
         app: "bitcoin-daemon-{{ .Values.bitcoin.client }}"
         tier: "bitcoin-{{ .Values.bitcoin.client }}"
     spec:
-      {{- if and .Values.bitcoin.nodeSelector.key .Values.bitcoin.nodeSelector.value }}
-      affinity:
-        nodeAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 1
-              preference:
-                matchExpressions:
-                  - key: {{ .Values.bitcoin.nodeSelector.key }}
-                    operator: In
-                    values:
-                      - {{ .Values.bitcoin.nodeSelector.value }}
-      {{- end }}
       volumes:
         - name: bitcoin-daemon-pv-storage
           persistentVolumeClaim:
-            claimName: "bitcoin-daemon-pv-claim-{{ .Values.bitcoin.client }}"
+            claimName: "bitcoin-daemon-pv-claim-test"
       containers:
         - name: bitcoin-core
           image: "{{ .Values.bitcoin.image.name }}:{{ .Values.bitcoin.image.tag }}"
