@@ -32,7 +32,7 @@ spec:
       volumes:
         - name: geth-ipc
           persistentVolumeClaim:
-            claimName: ethereum-client-pv-claim-{{ .Values.ethereum.client }}
+            claimName: ethereum-client-rpc-pv-claim-{{ .Values.ethereum.client }}
       containers:
         - name: ethereum-core
           image: "{{ .Values.ethereum.image.name }}:{{ .Values.ethereum.image.tag }}"
