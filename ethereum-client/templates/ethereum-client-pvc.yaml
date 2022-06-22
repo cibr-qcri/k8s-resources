@@ -1,7 +1,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: ethereum-client-rpc-pv-claim
+  name: ethereum-client-rpc-pv-claim-{{ .Values.ethereum.client }}
 spec:
   storageClassName: {{ .Values.ethereum.storage.className }}
   accessModes:
