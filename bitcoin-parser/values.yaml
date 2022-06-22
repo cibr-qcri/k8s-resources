@@ -16,10 +16,10 @@ bitcoin:
     targetPort: 8332
   client: 1
   parser:
-    startBlockHeight: "200000"
-    endBlockHeight: "300000"
+    startBlockHeight: "700000"
+    endBlockHeight: "800000"
     batchSize: "10000"
     bitcoinDaemonHost: "10.4.8.146"
     bitcoinDaemonUsername: "user"
     bitcoinDaemonPassword: "password"
-    bitcoinDaemonPort: "30234"
+    bitcoinDaemonPort: "30250"
