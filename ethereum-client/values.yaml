@@ -1,7 +1,7 @@
 ethereum:
   image:
     name: 'ethereum/client-go'
-    tag: 'v1.9.15'
+    tag: 'v1.10.8'
     pullPolicy: IfNotPresent
   storage:
     className: 'managed-nfs-storage'
