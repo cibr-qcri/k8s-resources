@@ -10,7 +10,7 @@ bitcoin:
     size: "800Gi"
   nodeSelector:
     key: "kubernetes.io/hostname"
-    value: "cybubcibrdev001"
+    value: "cybubtoshicl003"
   service:
     port: 8332
     targetPort: 8332
