@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: bitcoin-daemon-deployment
+  name: bitcoin-daemon-sync-deployment
   labels:
-    app: bitcoin-daemon
-    tier: bitcoin
+    app: bitcoin-daemon-sync
+    tier: bitcoin-sync
 spec:
   replicas:
   selector:
     matchLabels:
-      app: bitcoin-daemon
-      tier: bitcoin
+      app: bitcoin-daemon-sync
+      tier: bitcoin-sync
   template:
     metadata:
       labels:
-        app: bitcoin-daemon
-        tier: bitcoin
+        app: bitcoin-daemon-sync
+        tier: bitcoin-sync
     spec:
       {{- if and .Values.bitcoin.nodeSelector.key .Values.bitcoin.nodeSelector.value }}
       affinity:
@@ -32,7 +32,7 @@ spec:
       volumes:
         - name: bitcoin-daemon-pv-storage
           persistentVolumeClaim:
-            claimName: bitcoin-daemon-pv-claim
+            claimName: bitcoin-daemon-sync-pv-claim
       containers:
         - name: bitcoin-core
           image: "{{ .Values.bitcoin.image.name }}:{{ .Values.bitcoin.image.tag }}"
@@ -62,13 +62,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: bitcoin-daemon-service
+  name: bitcoin-daemon-sync-service
   labels:
-    tier: bitcoin
+    tier: bitcoin-sync
 spec:
   selector:
-    app: bitcoin-daemon
-    tier: bitcoin
+    app: bitcoin-daemon-sync
+    tier: bitcoin-sync
   ports:
     - targetPort: {{ .Values.bitcoin.service.targetPort }}
       port: {{ .Values.bitcoin.service.port }}

@@ -1,7 +1,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: bitcoin-daemon-pv-claim
+  name: bitcoin-daemon-sync-pv-claim
 spec:
   storageClassName: {{ .Values.bitcoin.storage.className }}
   accessModes:
