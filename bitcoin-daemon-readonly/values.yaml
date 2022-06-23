@@ -5,6 +5,9 @@ bitcoin:
     pullPolicy: Always
     volume:
       mountPath: "/mnt/data/bitcoin"
+  nodeSelector:
+    key: "kubernetes.io/hostname"
+    value: "cybubtoshicl012"
   service:
     port: 8332
     targetPort: 8332
