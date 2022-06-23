@@ -9,4 +9,4 @@ bitcoin:
     port: 8332
     targetPort: 8332
     nodePort: 30234
-  client: "test"
+  client: 1

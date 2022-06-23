@@ -1,7 +1,7 @@
 # kind: PersistentVolumeClaim
 # apiVersion: v1
 # metadata:
-#   name: "bitcoin-daemon-pv-claim-test
+#   name: "bitcoin-daemon-pv-claim-test"
 # spec:
 #   storageClassName: "managed-nfs-storage"
 #   accessModes:
