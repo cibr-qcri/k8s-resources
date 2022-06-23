@@ -8,5 +8,5 @@ ethereum:
     size: '1200Gi'
   nodeSelector:
     key: 'kubernetes.io/hostname'
-    value: 'cybubcibrdev001'
+    value: 'cybubtoshicl003'
   client: 1

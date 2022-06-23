@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ethereum-client-rpc-deployment-{{ .Values.ethereum.client }}
+  name: ethereum-client-deployment-{{ .Values.ethereum.client }}
   labels:
     app: ethereum-client-{{ .Values.ethereum.client }}
     tier: ethereum-{{ .Values.ethereum.client }}
@@ -32,11 +32,11 @@ spec:
       volumes:
         - name: geth-ipc
           persistentVolumeClaim:
-            claimName: ethereum-client-rpc-pv-claim-{{ .Values.ethereum.client }}
+            claimName: ethereum-client-pv-claim-{{ .Values.ethereum.client }}
       containers:
         - name: ethereum-core
           image: "{{ .Values.ethereum.image.name }}:{{ .Values.ethereum.image.tag }}"
-          command: ['/bin/sh', '-c', 'geth --syncmode full  --cache=2048 --http --http.port=8545 --http.addr=0.0.0.0 --http.api="admin,debug,web3,eth,personal" --http.vhosts="*" --txlookuplimit=0 --vmdebug --log.debug --allow-insecure-unlock']
+          command: ['/bin/sh', '-c', 'geth --gcmode archive --syncmode full  --cache=4096 --http --http.port=8545 --http.addr=0.0.0.0 --http.api="admin,debug,web3,eth,personal" --http.vhosts="*" --txlookuplimit=0 --vmdebug --log.debug --allow-insecure-unlock']
           ports:
           - name: rpc
             containerPort: 8545
@@ -44,13 +44,6 @@ spec:
             containerPort: 8546
           - name: p2p
             containerPort: 30303
-          resources:
-            requests:
-              memory: "10Gi"
-              cpu: 2
-            limits:
-              memory: "25Gi"
-              cpu: 8  
           imagePullPolicy: {{ .Values.ethereum.image.pullPolicy }}
           volumeMounts:
             - name: geth-ipc
@@ -60,7 +53,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: ethereum-client-rpc-service-{{ .Values.ethereum.client }}
+  name: ethereum-client-service-{{ .Values.ethereum.client }}
   labels:
     tier: ethereum-{{ .Values.ethereum.client }}
 spec:
