@@ -1,11 +1,28 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ethereum-client-deployment-sync-pv-volume
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: "1800Gi"
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/ssd-data01/"
+
+---
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: ethereum-client-pv-claim-{{ .Values.ethereum.client }}
+  name: ethereum-client-deployment-sync-pv-claim
 spec:
-  storageClassName: {{ .Values.ethereum.storage.className }}
+  storageClassName: manual
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: {{ .Values.ethereum.storage.size }}
+      storage: "1800Gi"
+

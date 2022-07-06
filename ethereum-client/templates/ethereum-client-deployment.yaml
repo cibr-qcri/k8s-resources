@@ -32,7 +32,7 @@ spec:
       volumes:
         - name: geth-ipc
           persistentVolumeClaim:
-            claimName: ethereum-client-pv-claim-{{ .Values.ethereum.client }}
+            claimName: ethereum-client-deployment-sync-pv-claim
       containers:
         - name: ethereum-core
           image: "{{ .Values.ethereum.image.name }}:{{ .Values.ethereum.image.tag }}"
@@ -65,7 +65,7 @@ spec:
   - name: rpc
     port: 8545
     targetPort: 8545
-    nodePort: 31352
+    nodePort: 31350
   - name: ws
     port: 8546
   - name: p2p

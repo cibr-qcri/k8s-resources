@@ -5,7 +5,7 @@ ethereum:
     pullPolicy: IfNotPresent
   storage:
     className: 'managed-nfs-storage'
-    size: '1200Gi'
+    size: '1500Gi'
   nodeSelector:
     key: 'kubernetes.io/hostname'
     value: 'cybubcibrdev001'
